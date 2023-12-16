@@ -21,6 +21,29 @@
 			transition: 1s;
 			transition-timing-function: linear;
 		}
+
+		.shooteru {
+			width: 80px; 
+			position: absolute;
+			display: none;	
+
+		}
+		
+		.upgrade {
+			background: red;
+			width: 200px;
+			height: 100px;
+		}
+
+		.sun { 
+			height: 100px;
+			width: 100px;
+			position: absolute;
+			display: block;	
+			transition: 1s;
+			opacity: 0;
+			transition-timing-function: linear;
+		}	
 	</style>
 </head>
 <body>	
@@ -28,6 +51,8 @@
 	<div class="box" style="">
 		
 		<h5 style="position: absolute; left: 600px; top: 50px" class="score"></h5>
+		<button class="upgrade btn1">UPGRADE</button>
+		<button class="upgrade btn2">SUNFALL</button>
 
 		<!--ГОРОХИ-->
 	    <img class="shooter" src="peashooter.png"  style="top: 300px; ">		
@@ -35,6 +60,20 @@
 		<img class="shooter" src="peashooter.png"  style="top: 550px; ">	
 		<img class="shooter" src="peashooter.png"  style="top: 680px; ">
 		<img class="shooter" src="peashooter.png"  style="top: 820px; ">
+
+		<!--УЛУЧЕНЫШИЕ ГОРОХИ-->
+	    <img class="shooteru" src="upgradedpea.png"  style="top: 300px; ">		
+		<img class="shooteru" src="upgradedpea.png"  style="top: 420px; ">	
+		<img class="shooteru" src="upgradedpea.png"  style="top: 550px; ">	
+		<img class="shooteru" src="upgradedpea.png"  style="top: 680px; ">
+		<img class="shooteru" src="upgradedpea.png"  style="top: 820px; ">
+
+		<!--SUNS-->
+	    <img class="sun" src="sun.png" style="top: 0px">		
+		<img class="sun" src="sun.png" style="top: 0px">	
+		<img class="sun" src="sun.png" style="top: 0px">	
+		<img class="sun" src="sun.png" style="top: 0px">
+		<img class="sun" src="sun.png" style="top: 0px">
 
 
 		<!--ЗОМБИ-->
@@ -46,12 +85,28 @@
 	</div>
 <script>
 	let shooters = document.querySelectorAll(".shooter");
+	let shootersu = document.querySelectorAll(".shooteru")
+	let btn1 = document.querySelector(".btn1")
+	let btn2 = document.querySelector(".btn2")
+	let suns = document.querySelectorAll(".sun")
 	let sl = 600;
 	shooters[0].style.left = sl + "px";
 	shooters[1].style.left = sl + "px";
 	shooters[2].style.left = sl + "px";
 	shooters[3].style.left = sl + "px";
 	shooters[4].style.left = sl + "px";
+
+	shootersu[0].style.left = sl + "px";
+	shootersu[1].style.left = sl + "px";
+	shootersu[2].style.left = sl + "px";
+	shootersu[3].style.left = sl + "px";
+	shootersu[4].style.left = sl + "px";
+
+	suns[0].style.left = 600 + "px";
+	suns[1].style.left = 630 + "px";
+	suns[2].style.left = 660 + "px";
+	suns[3].style.left = 690 + "px";
+	suns[4].style.left = 720 + "px";
 	
 
 	let zombies = document.querySelectorAll(".zombie");
@@ -74,12 +129,29 @@
 	let check3 = 0;
 	let check4 = 0;
 	let home = 500;
+	let num = 300
+	btn2.onclick = function() {
+		for (let i = 0; i < 5; i=i+1) {
+			suns[i].style.top = num + "px"
+			suns[i].style.opacity = 1;
+			num = num + 120;
+		}
+	}
+
+	btn1.onclick = function() {
+		for(i = 0 ; i < 5; i = i+1) {
+			
+			shooters[i].style.display = "none"
+			shootersu[i].style.display = "block"
+		}
+	}
 
 	zombies[0].onclick = function() {
 		zr1 = zr1 - 104;
 		if(zr1 < 680) {
 			zr1 = 680;
 			shooters[0].style.display = "none"
+			shootersu[0].style.display = "none"
 			check0 = 1
 		}
 		zombies[0].style.left = zr1 + "px";
@@ -97,6 +169,7 @@
 		if(zr2 < 680) {
 			zr2 = 680;
 			shooters[1].style.display = "none"
+			shootersu[1].style.display = "none"
 			check1 = 1
 		}
 		zombies[1].style.left = zr2 + "px";
@@ -114,6 +187,7 @@
 		if(zr3 < 680) {
 			zr3 = 680;
 			shooters[2].style.display = "none"
+			shootersu[2].style.display = "none"
 			check2 = 1
 		}
 		zombies[2].style.left = zr3 + "px";
@@ -131,6 +205,7 @@
 		if(zr4 < 680) {
 			zr4 = 680;
 			shooters[3].style.display = "none"
+			shootersu[3].style.display = "none"
 			check3 = 1
 		}
 		zombies[3].style.left = zr4 + "px";
@@ -148,6 +223,7 @@
 		if(zr5 < 680) {
 			zr5 = 680;
 			shooters[4].style.display = "none"
+			shootersu[4].style.display = "none"
 			check4 = 1
 		}
 		zombies[4].style.left = zr5 + "px";
@@ -160,10 +236,30 @@
 		}
 	}
 
+	suns[0].onclick = function() {
+		suns[0].style.top = "30px"
+		suns[0].style.left = "890px"
+	}
 
-		if(check == 1) {
-			shooters[0].style.display = ""
-		}
+	suns[1].onclick = function() {
+		suns[1].style.top = "30px"
+		suns[1].style.left = "890px"
+	}
+
+	suns[2].onclick = function() {
+		suns[2].style.top = "30px"
+		suns[2].style.left = "890px"
+	}
+
+	suns[3].onclick = function() {
+		suns[3].style.top = "30px"
+		suns[3].style.left = "890px"
+	}
+
+	suns[4].onclick = function() {
+		suns[4].style.top = "30px"
+		suns[4].style.left = "890px"
+	}
 
 </script>
 </body>
